@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import AdminLogin from './AdminLogin'
 import AdminDashboard from './AdminDashboard'
 import AdminEstimateRequests from './AdminEstimateRequests'
@@ -17,13 +17,7 @@ export default function Admin() {
     totalProjects: 0
   })
 
-  useEffect(() => {
-    if (adminKey) {
-      loadStats()
-    }
-  }, [adminKey])
-
-  const loadStats = async () => {
+  const loadStats = useCallback(async () => {
     try {
       const [msgs, reviews, projects] = await Promise.all([
         adminFetch('/api/admin/messages', adminKey).then(r => r.json()),
@@ -39,7 +33,14 @@ export default function Admin() {
     } catch (e) {
       console.error('Failed to load stats:', e)
     }
-  }
+  }, [adminKey])
+
+  useEffect(() => {
+    if (adminKey) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
+      loadStats()
+    }
+  }, [adminKey, loadStats])
 
   const handleLogout = () => {
     setAdminKey('')

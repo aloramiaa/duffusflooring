@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import { adminFetch } from '../lib/adminApi'
 
 export default function AdminEstimateRequests({ adminKey, onUpdate }) {
@@ -7,11 +7,7 @@ export default function AdminEstimateRequests({ adminKey, onUpdate }) {
   const [filter, setFilter] = useState('all')
   const [selectedMessage, setSelectedMessage] = useState(null)
 
-  useEffect(() => {
-    loadMessages()
-  }, [adminKey])
-
-  const loadMessages = async () => {
+  const loadMessages = useCallback(async () => {
     setLoading(true)
     try {
       const res = await adminFetch('/api/admin/messages', adminKey)
@@ -22,7 +18,11 @@ export default function AdminEstimateRequests({ adminKey, onUpdate }) {
     } finally {
       setLoading(false)
     }
-  }
+  }, [adminKey])
+
+  useEffect(() => {
+    loadMessages()
+  }, [adminKey, loadMessages])
 
   const handleStatusChange = async (id, status) => {
     try {

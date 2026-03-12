@@ -18,7 +18,7 @@ export default function AdminLogin({ onLogin }) {
       } else {
         setError(await parseApiError(res, 'Invalid admin key'))
       }
-    } catch (e) {
+    } catch {
       setError('Failed to connect to server')
     } finally {
       setLoading(false)
