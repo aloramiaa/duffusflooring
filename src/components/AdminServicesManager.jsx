@@ -16,6 +16,7 @@ export default function AdminServicesManager({ adminKey, onUpdate }) {
 
   useEffect(() => {
     loadServices()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [adminKey])
 
   const loadServices = async () => {

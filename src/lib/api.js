@@ -1,7 +1,3 @@
-function trimTrailingSlash(value) {
-  return String(value || '').replace(/\/+$/, '')
-}
-
 function extractMessage(value, fallback) {
   if (!value) return fallback
 
@@ -43,23 +39,19 @@ function extractMessage(value, fallback) {
 
 // Used by AdminLogin to pre-fill the default local key and show a dev hint.
 export function isLocalHost() {
-  if (typeof window === 'undefined') return false
-  return ['localhost', '127.0.0.1'].includes(window.location.hostname)
+  return false
 }
 
 /**
  * Resolve an API path to a full URL.
  * In production (and vercel dev) relative paths are used so the same-origin
  * serverless functions handle requests automatically.
- * Override with VITE_API_BASE if you need to point at a different host.
  */
 export function resolveApiPath(path) {
   // Already an absolute URL — pass through unchanged.
   if (/^https?:\/\//i.test(path)) return path
 
-  const base = trimTrailingSlash(import.meta.env.VITE_API_BASE || '')
-  const normalized = String(path || '/').startsWith('/') ? String(path || '/') : `/${path}`
-  return `${base}${normalized}`
+  return String(path || '/').startsWith('/') ? String(path || '/') : `/${path}`
 }
 
 export function getErrorMessage(error, fallback = 'Request failed') {
