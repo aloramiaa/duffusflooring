@@ -1,29 +1,6 @@
 # Duffus Flooring - Premium Flooring Solutions Website
 
 A high-performance, visually stunning website designed for **Duffus Flooring**. This project features a "Modern Luxury" aesthetic, utilizing glassmorphism, parallax effects, and smooth scroll animations to create a premium user experience.
-## Reviews backend (local)
-
-I added a minimal reviews API under `server/` to accept reviews and optional image uploads.
-
-- Start the server:
-
-```bash
-cd server
-npm install
-npm start
-```
-
-The API will run at `http://localhost:4000` by default with endpoints:
-
-- `GET /api/reviews` — list saved reviews
-- `POST /api/reviews` — multipart/form-data with fields `name`, `text`, `rating` and optional `image` file
-
-Uploaded images are stored under `server/uploads` and reviews are persisted in `server/reviews.json`.
-
-In development the React app expects the API at `http://localhost:4000`. You can change the base URL by setting `VITE_API_BASE` in your env.
-# Duffus Flooring - Premium Flooring Solutions Website
-
-A high-performance, visually stunning website designed for **Duffus Flooring**. This project features a "Modern Luxury" aesthetic, utilizing glassmorphism, parallax effects, and smooth scroll animations to create a premium user experience.
 
 ![Project Status](https://img.shields.io/badge/Status-Complete-success)
 ![License](https://img.shields.io/badge/License-MIT-blue)

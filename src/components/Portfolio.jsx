@@ -72,7 +72,7 @@ export default function Portfolio() {
         setProjects([])
         setLoading(false)
       })
-  }, [])
+  }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
     const onHash = () => {

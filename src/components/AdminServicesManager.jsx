@@ -16,7 +16,7 @@ export default function AdminServicesManager({ adminKey, onUpdate }) {
 
   useEffect(() => {
     loadServices()
-  }, [adminKey])
+  }, [adminKey]) // eslint-disable-line react-hooks/exhaustive-deps
 
   const loadServices = async () => {
     setLoading(true)

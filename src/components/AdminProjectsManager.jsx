@@ -20,7 +20,7 @@ export default function AdminProjectsManager({ adminKey, onUpdate }) {
 
   useEffect(() => {
     loadProjects()
-  }, [adminKey])
+  }, [adminKey]) // eslint-disable-line react-hooks/exhaustive-deps
 
   const loadProjects = async () => {
     setLoading(true)
