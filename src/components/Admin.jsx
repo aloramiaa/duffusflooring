@@ -17,12 +17,6 @@ export default function Admin() {
     totalProjects: 0
   })
 
-  useEffect(() => {
-    if (adminKey) {
-      loadStats()
-    }
-  }, [adminKey])
-
   const loadStats = async () => {
     try {
       const [msgs, reviews, projects] = await Promise.all([
@@ -40,6 +34,14 @@ export default function Admin() {
       console.error('Failed to load stats:', e)
     }
   }
+
+  useEffect(() => {
+    if (adminKey) {
+      // Intentionally call async load function
+      loadStats()
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [adminKey])
 
   const handleLogout = () => {
     setAdminKey('')

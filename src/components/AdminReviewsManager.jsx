@@ -8,7 +8,7 @@ export default function AdminReviewsManager({ adminKey, onUpdate }) {
 
   useEffect(() => {
     loadReviews()
-  }, [adminKey])
+  }, [adminKey]) // eslint-disable-line react-hooks/exhaustive-deps
 
   const loadReviews = async () => {
     setLoading(true)

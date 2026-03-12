@@ -9,7 +9,7 @@ export default function AdminEstimateRequests({ adminKey, onUpdate }) {
 
   useEffect(() => {
     loadMessages()
-  }, [adminKey])
+  }, [adminKey]) // eslint-disable-line react-hooks/exhaustive-deps
 
   const loadMessages = async () => {
     setLoading(true)

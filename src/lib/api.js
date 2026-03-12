@@ -41,12 +41,6 @@ function extractMessage(value, fallback) {
   return fallback
 }
 
-// Used by AdminLogin to pre-fill the default local key and show a dev hint.
-export function isLocalHost() {
-  if (typeof window === 'undefined') return false
-  return ['localhost', '127.0.0.1'].includes(window.location.hostname)
-}
-
 /**
  * Resolve an API path to a full URL.
  * In production (and vercel dev) relative paths are used so the same-origin
