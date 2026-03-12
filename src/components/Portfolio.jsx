@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useCallback } from 'react'
 
 export default function Portfolio() {
   const [manifest, setManifest] = useState(null)
@@ -26,7 +26,7 @@ export default function Portfolio() {
     return `/${encodeURI(normalized)}`
   }
 
-  const deriveProjectsFromManifest = (manifestData) => {
+  const deriveProjectsFromManifest = useCallback((manifestData) => {
     const albums = manifestData?.albums || {}
     return Object.entries(albums).map(([albumName, files], idx) => {
       const items = Array.isArray(files) ? files : []
@@ -46,7 +46,7 @@ export default function Portfolio() {
         coverImage: firstImage ? toPublicAssetUrl(firstImage) : '/hero.jpg'
       }
     })
-  }
+  }, [])
 
 
 
@@ -72,7 +72,7 @@ export default function Portfolio() {
         setProjects([])
         setLoading(false)
       })
-  }, [])
+  }, [deriveProjectsFromManifest])
 
   useEffect(() => {
     const onHash = () => {

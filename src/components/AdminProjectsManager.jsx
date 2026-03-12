@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import { adminFetch, filesToDataUrls } from '../lib/adminApi'
 import { readFileAsDataUrl, resolveAssetUrl } from '../lib/reviews'
 
@@ -18,11 +18,7 @@ export default function AdminProjectsManager({ adminKey, onUpdate }) {
   const [useCoverImage, setUseCoverImage] = useState(false)
   const [submitting, setSubmitting] = useState(false)
 
-  useEffect(() => {
-    loadProjects()
-  }, [adminKey])
-
-  const loadProjects = async () => {
+  const loadProjects = useCallback(async () => {
     setLoading(true)
     try {
       const res = await adminFetch('/api/admin/projects', adminKey)
@@ -33,7 +29,11 @@ export default function AdminProjectsManager({ adminKey, onUpdate }) {
     } finally {
       setLoading(false)
     }
-  }
+  }, [adminKey])
+
+  useEffect(() => {
+    loadProjects()
+  }, [adminKey, loadProjects])
 
   const handleInputChange = (e) => {
     const { name, value } = e.target

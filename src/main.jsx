@@ -32,7 +32,7 @@ if (typeof window !== 'undefined' && 'IntersectionObserver' in window) {
 if (typeof window !== 'undefined') {
   // On history navigation or explicit hash changes, scroll to top (except hash anchors handled separately)
   window.addEventListener('popstate', () => window.scrollTo({ top: 0, left: 0 }))
-  window.addEventListener('hashchange', (e) => {
+  window.addEventListener('hashchange', () => {
     // If the new hash is empty or points to the root 'portfolio' route, scroll to top
     const hash = window.location.hash || ''
     if (!hash || hash === '#portfolio') window.scrollTo({ top: 0, left: 0 })

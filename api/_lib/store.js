@@ -1,3 +1,4 @@
+/* global process, Buffer */
 import { head, put } from '@vercel/blob'
 
 const PREFIX = 'duffus-flooring'

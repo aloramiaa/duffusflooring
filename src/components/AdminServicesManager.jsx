@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import { adminFetch } from '../lib/adminApi'
 import { readFileAsDataUrl, resolveAssetUrl } from '../lib/reviews'
 
@@ -14,11 +14,7 @@ export default function AdminServicesManager({ adminKey, onUpdate }) {
   const [image, setImage] = useState(null)
   const [submitting, setSubmitting] = useState(false)
 
-  useEffect(() => {
-    loadServices()
-  }, [adminKey])
-
-  const loadServices = async () => {
+  const loadServices = useCallback(async () => {
     setLoading(true)
     try {
       const res = await adminFetch('/api/admin/services', adminKey)
@@ -29,7 +25,11 @@ export default function AdminServicesManager({ adminKey, onUpdate }) {
     } finally {
       setLoading(false)
     }
-  }
+  }, [adminKey])
+
+  useEffect(() => {
+    loadServices()
+  }, [adminKey, loadServices])
 
   const handleInputChange = (e) => {
     const { name, value } = e.target

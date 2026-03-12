@@ -43,8 +43,7 @@ function extractMessage(value, fallback) {
 
 // Used by AdminLogin to pre-fill the default local key and show a dev hint.
 export function isLocalHost() {
-  if (typeof window === 'undefined') return false
-  return ['localhost', '127.0.0.1'].includes(window.location.hostname)
+  return false
 }
 
 /**

@@ -1,66 +1,66 @@
 import { useState, useEffect } from 'react'
 
+// Fallback services if API fails
+const defaultServices = [
+  {
+    id: 'hardwood',
+    name: 'Hardwood Installation & Refinishing',
+    description: 'Premium hardwood flooring installed and refinished with precision to enhance durability and natural beauty.',
+    bullets: [
+      'Solid and engineered hardwood installation',
+      'Sanding and refinishing',
+      'Custom stain and finish options',
+      'Board replacement and repairs'
+    ]
+  },
+  {
+    id: 'vinyl',
+    name: 'Luxury Vinyl Tile (LVT) & Luxury Vinyl Plank (LVP)',
+    description: 'Durable, water-resistant flooring solutions that replicate natural wood while offering easy maintenance.',
+    bullets: [
+      'Professional LVT & LVP installation',
+      'Residential and commercial applications',
+      'Modern, low-maintenance finishes',
+      'Repair and replacement services'
+    ]
+  },
+  {
+    id: 'tile',
+    name: 'Tile Installation',
+    description: 'Coordinated tile installations completed by trusted trade professionals to meet high workmanship standards.',
+    bullets: [
+      'Floor tile installation',
+      'Bathroom tile flooring',
+      'Entryways and high-traffic areas'
+    ]
+  },
+  {
+    id: 'commercial',
+    name: 'Commercial Flooring Solutions',
+    description: 'Reliable flooring systems designed to withstand heavy use while maintaining a clean, professional appearance.',
+    bullets: [
+      'Office and retail installations',
+      'Rental property flooring',
+      'Multi-unit developments',
+      'Durable, high-traffic materials'
+    ]
+  },
+  {
+    id: 'repairs',
+    name: 'Subfloor Preparation, Leveling & Repairs',
+    description: 'A strong foundation ensures long-term performance — we prepare and inspect every surface before installation.',
+    bullets: [
+      'Subfloor inspection and preparation',
+      'Surface leveling',
+      'Structural repairs',
+      'Maintenance solutions'
+    ]
+  }
+]
+
 export default function Services() {
   const [services, setServices] = useState([])
   const [loading, setLoading] = useState(true)
-
-  // Fallback services if API fails
-  const defaultServices = [
-    {
-      id: 'hardwood',
-      name: 'Hardwood Installation & Refinishing',
-      description: 'Premium hardwood flooring installed and refinished with precision to enhance durability and natural beauty.',
-      bullets: [
-        'Solid and engineered hardwood installation',
-        'Sanding and refinishing',
-        'Custom stain and finish options',
-        'Board replacement and repairs'
-      ]
-    },
-    {
-      id: 'vinyl',
-      name: 'Luxury Vinyl Tile (LVT) & Luxury Vinyl Plank (LVP)',
-      description: 'Durable, water-resistant flooring solutions that replicate natural wood while offering easy maintenance.',
-      bullets: [
-        'Professional LVT & LVP installation',
-        'Residential and commercial applications',
-        'Modern, low-maintenance finishes',
-        'Repair and replacement services'
-      ]
-    },
-    {
-      id: 'tile',
-      name: 'Tile Installation',
-      description: 'Coordinated tile installations completed by trusted trade professionals to meet high workmanship standards.',
-      bullets: [
-        'Floor tile installation',
-        'Bathroom tile flooring',
-        'Entryways and high-traffic areas'
-      ]
-    },
-    {
-      id: 'commercial',
-      name: 'Commercial Flooring Solutions',
-      description: 'Reliable flooring systems designed to withstand heavy use while maintaining a clean, professional appearance.',
-      bullets: [
-        'Office and retail installations',
-        'Rental property flooring',
-        'Multi-unit developments',
-        'Durable, high-traffic materials'
-      ]
-    },
-    {
-      id: 'repairs',
-      name: 'Subfloor Preparation, Leveling & Repairs',
-      description: 'A strong foundation ensures long-term performance — we prepare and inspect every surface before installation.',
-      bullets: [
-        'Subfloor inspection and preparation',
-        'Surface leveling',
-        'Structural repairs',
-        'Maintenance solutions'
-      ]
-    }
-  ]
 
   useEffect(() => {
     fetch('/api/services')

@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import { adminFetch } from '../lib/adminApi'
 
 export default function AdminDashboard({ adminKey, stats, refreshStats }) {
@@ -6,11 +6,7 @@ export default function AdminDashboard({ adminKey, stats, refreshStats }) {
   const [projects, setProjects] = useState([])
   const [loading, setLoading] = useState(true)
 
-  useEffect(() => {
-    loadDashboardData()
-  }, [adminKey])
-
-  const loadDashboardData = async () => {
+  const loadDashboardData = useCallback(async () => {
     setLoading(true)
     try {
       const [msgs, proj] = await Promise.all([
@@ -24,7 +20,11 @@ export default function AdminDashboard({ adminKey, stats, refreshStats }) {
     } finally {
       setLoading(false)
     }
-  }
+  }, [adminKey])
+
+  useEffect(() => {
+    loadDashboardData()
+  }, [adminKey, loadDashboardData])
 
   const formatDate = (date) => {
     return new Date(date).toLocaleDateString('en-US', {

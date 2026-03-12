@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import { adminFetch } from '../lib/adminApi'
 import { resolveAssetUrl } from '../lib/reviews'
 
@@ -6,11 +6,7 @@ export default function AdminReviewsManager({ adminKey, onUpdate }) {
   const [reviews, setReviews] = useState([])
   const [loading, setLoading] = useState(true)
 
-  useEffect(() => {
-    loadReviews()
-  }, [adminKey])
-
-  const loadReviews = async () => {
+  const loadReviews = useCallback(async () => {
     setLoading(true)
     try {
       const res = await adminFetch('/api/admin/reviews', adminKey)
@@ -21,7 +17,11 @@ export default function AdminReviewsManager({ adminKey, onUpdate }) {
     } finally {
       setLoading(false)
     }
-  }
+  }, [adminKey])
+
+  useEffect(() => {
+    loadReviews()
+  }, [adminKey, loadReviews])
 
   const handleDelete = async (id) => {
     if (!confirm('Delete this review? This cannot be undone.')) return
