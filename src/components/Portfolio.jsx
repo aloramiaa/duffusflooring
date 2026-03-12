@@ -72,6 +72,7 @@ export default function Portfolio() {
         setProjects([])
         setLoading(false)
       })
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   useEffect(() => {

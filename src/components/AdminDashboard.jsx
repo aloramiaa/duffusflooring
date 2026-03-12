@@ -8,6 +8,7 @@ export default function AdminDashboard({ adminKey, stats, refreshStats }) {
 
   useEffect(() => {
     loadDashboardData()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [adminKey])
 
   const loadDashboardData = async () => {
